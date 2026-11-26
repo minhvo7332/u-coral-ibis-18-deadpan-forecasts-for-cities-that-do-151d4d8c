@@ -22,6 +22,7 @@ def main() -> None:
     assert 1 <= len(ENTRY) <= 160, f"entry is {len(ENTRY)} chars"
     assert ENTRY.strip(), "entry must not be only whitespace"
     assert "\n" not in ENTRY, "entry must be a single line"
+    ENTRY.encode("utf-8")  # fail loudly if the text ever stops being UTF-8
     out_dir = "/output"
     os.makedirs(out_dir, exist_ok=True)
     os.umask(0o022)
