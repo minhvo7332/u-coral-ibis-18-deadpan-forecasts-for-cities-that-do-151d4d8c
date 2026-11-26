@@ -30,7 +30,6 @@ def main() -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(ENTRY + "\n")
     os.chmod(path, 0o644)
-    os.chmod(out_dir, 0o755)
 
 
 if __name__ == "__main__":
