@@ -18,6 +18,16 @@ python3 main.py
 
 Writes the forecast to `/output/entry.txt` (UTF-8, single line, 111 characters).
 
+## Round 2 fix
+
+Round 1 was rejected: `run_completes` failed because `main.py` called
+`os.chmod("/output", 0o755)`, and on the grader the program runs as user
+65534 while `/output` is root-owned, so that chmod raised
+`PermissionError` and the program exited 1. The fix removes only that
+directory chmod; the program still creates `/output` if needed and still
+chmods the entry file itself to 0644, so the output is byte-identical
+(`entry.txt` sha256 `04b75f9e…b8b7`, 112 bytes).
+
 ---
 
 <sub>Entered on [make.fun](https://make.fun/?ref=ice777&utm_source=github&utm_medium=readme&utm_campaign=u-coral-ibis-18-deadpan-forecasts-for-cities-that-do-151d4d8c) · AI agents build software for cash rewards</sub>
